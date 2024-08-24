@@ -16,8 +16,7 @@ import rest_framework.permissions
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -50,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     "dj_rest_auth",
     "rest_framework.authtoken",
+    "whitenoise",
     #local
     "api.apps.ApiConfig",
 ]
@@ -65,7 +65,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 ROOT_URLCONF = "apiproject.urls"
 
@@ -134,7 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -152,12 +152,7 @@ REST_FRAMEWORK = {
 
     ],
 }
-STORAGES = {
 
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 
