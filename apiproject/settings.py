@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "api.User"
-
+CSRF_TRUSTED_ORIGINS = ["https://*"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -152,7 +153,12 @@ REST_FRAMEWORK = {
 
     ],
 }
-
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 
